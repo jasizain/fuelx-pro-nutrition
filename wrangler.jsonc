@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers config — serves this folder as a static website.
+  // The project name becomes the URL: fuelx-pro-nutrition.<your-subdomain>.workers.dev
+  "name": "fuelx-pro-nutrition",
+  "compatibility_date": "2026-10-24",
+  "assets": {
+    "directory": "./"
+  }
+}
