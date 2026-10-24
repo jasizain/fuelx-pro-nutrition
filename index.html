@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fuel X Pro Nutrition — Fuel Your Gains</title>
+  <meta name="description" content="Fuel X Pro Nutrition — genuine sports supplements and expert nutrition guidance. Whey, creatine, pre-workout, mass gainers and more.">
+  <link rel="icon" href="assets/logo-badge.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,700;0,800;1,800;1,900&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=25">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      // Colour theme: 'volt' (default), 'light' or 'classic'; visitors' toggle choice is remembered
+      var saved = null;
+      try { saved = localStorage.getItem('fx-theme-v2'); } catch (e) {}
+      if (saved === 'classic') d.dataset.theme = 'classic';
+      else if (saved !== 'light') d.dataset.theme = 'volt';
+      // Intro: the full cinematic version once per visit (tab session), a quick hero reveal after that
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var seen = false;
+        try { seen = sessionStorage.getItem('fx-intro-seen') === '1'; } catch (e) {}
+        if (/[?&]intro\b/.test(location.search)) seen = false; // add ?intro to the address to replay the full version
+        d.dataset.intro = seen ? 'quick' : 'full';
+        d.classList.add('hero-pre');
+        if (!seen) d.classList.add('intro-on');
+        // Failsafe: never leave the page covered or the hero hidden if script.js doesn't run
+        setTimeout(function () { d.classList.remove('intro-on', 'hero-pre'); }, 5000);
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="prices.js?v=1" defer></script>
+  <script src="script.js?v=24" defer></script>
+</head>
+<body>
+
+  <!-- INTRO: the logo assembles itself (X, then FUEL and PRO out of it, the figure, NUTRITION), lands in the navbar, and the hero builds -->
+  <div class="cine" aria-hidden="true">
+    <div class="cine__bg"></div>
+    <div class="cine__logo">
+      <span class="cine__flare"></span>
+      <img src="assets/logo-parts/figure.png" alt="" class="cine__part cine__figure">
+      <span class="cine__clip cine__clip--fuel"><img src="assets/logo-parts/fuel.png" alt="" class="cine__part cine__fuel"></span>
+      <span class="cine__clip cine__clip--pro"><img src="assets/logo-parts/pro.png" alt="" class="cine__part cine__pro"></span>
+      <img src="assets/logo-parts/nutrition.png" alt="" class="cine__part cine__nutrition">
+      <img src="assets/logo-parts/x.png" alt="" class="cine__part cine__x">
+      <span class="cine__shine"></span>
+      <img src="assets/logo-dark.png" alt="" class="cine__part cine__logo-dark">
+    </div>
+    <button type="button" class="cine__skip" tabindex="-1">Skip intro</button>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- NAV: plain bar — wordmark, links, one action -->
+  <header class="nav" id="nav">
+    <div class="frame nav__inner">
+      <a href="#top" class="nav__logo" aria-label="Fuel X Pro Nutrition home">
+        <img src="assets/logo-dark.png" alt="Fuel X Pro Nutrition" class="logo-on-light">
+        <img src="assets/logo-light.png" alt="Fuel X Pro Nutrition" class="logo-on-dark">
+      </a>
+      <nav class="nav__links" id="navLinks" aria-label="Main">
+        <a href="#shop">Shop</a>
+        <a href="#goals">Goals</a>
+        <a href="#coach">The Coach</a>
+        <a href="#why">Why Us</a>
+        <a href="#visit">Visit Us</a>
+      </nav>
+      <button type="button" class="nav__cart" aria-controls="bag" aria-label="Open your order">
+        <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="nav__cart-count" hidden>0</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Change theme">
+        <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" class="fill"/></svg>
+      </button>
+      <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="btn btn--accent btn--sm nav__cta" data-wa>
+        <span><svg viewBox="0 0 32 32" class="ico ico--wa" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg><span class="nav__cta-text">Order Now</span></span>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: a classic launch stage; four products take turns in the light -->
+    <section class="hero" id="top">
+      <div class="frame hero__inner">
+        <div class="hero__copy">
+          <h1 class="hero__title" data-lines>Fuel your gains.<br><em class="hero__red">Train</em> like a pro.</h1>
+          <p class="hero__lead" data-r>
+            <strong>Sports nutrition &amp; supplements.</strong> Genuine supplements, honest advice and nutrition that actually fits your goal —
+            whether you're bulking, cutting or chasing your next PR.
+          </p>
+          <div class="hero__actions" data-r>
+            <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="btn btn--accent" data-wa>
+              <span><svg viewBox="0 0 32 32" class="ico ico--wa" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg>Order on WhatsApp</span>
+            </a>
+            <a href="#products" class="btn btn--ghost"><span>Explore Products</span></a>
+          </div>
+          <ul class="hero__facts" data-r>
+            <li><strong data-count="100" data-suffix="%">100%</strong><span>Authentic products</span></li>
+            <li><strong>1:1</strong><span>Nutrition guidance</span></li>
+            <li><strong>Fast</strong><span>Doorstep delivery</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__stage">
+          <div class="hero__glow" aria-hidden="true"></div>
+          <span class="hero__ring" aria-hidden="true"></span>
+          <div class="hero__lift">
+            <div class="hero__float">
+              <div class="hero__slides">
+                <img class="hero__product is-active" src="assets/hero/1-optima-whey.png" alt="Optima Labs Whey Optima protein" fetchpriority="high" data-brand="Optima Labs" data-name="Whey Optima">
+                <img class="hero__product" src="assets/hero/2-on-gold-standard.png" alt="Optimum Nutrition Gold Standard 100% Whey" loading="eager" data-brand="Optimum Nutrition" data-name="Gold Standard 100% Whey">
+                <img class="hero__product" src="assets/hero/3-evogen-isoject.png" alt="Evogen Isoject whey isolate" loading="eager" data-brand="Evogen" data-name="Isoject Whey Isolate">
+                <img class="hero__product" src="assets/hero/4-gnc-creatine.png" alt="GNC Pro Performance Creatine Monohydrate" loading="eager" data-brand="GNC" data-name="Pro Performance Creatine">
+              </div>
+            </div>
+          </div>
+          <span class="hero__shadow" aria-hidden="true"></span>
+          <div class="hero__caption">
+            <p class="hero__caption-text" aria-live="polite"><span class="hero__caption-brand">Optima Labs</span><span class="hero__caption-name">Whey Optima</span></p>
+            <div class="hero__dots">
+              <button type="button" class="hero__dot is-active" aria-label="Show Optima Labs Whey Optima">01</button>
+              <button type="button" class="hero__dot" aria-label="Show Optimum Nutrition Gold Standard 100% Whey">02</button>
+              <button type="button" class="hero__dot" aria-label="Show Evogen Isoject Whey Isolate">03</button>
+              <button type="button" class="hero__dot" aria-label="Show GNC Pro Performance Creatine">04</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANDS: two calm straight lines between thin rules; product names in serif italic, promises in small caps -->
+    <div class="bands" aria-hidden="true">
+      <div class="band">
+        <div class="band__track"><span>Whey Protein</span><i>✦</i><span>Creatine</span><i>✦</i><span>Pre-Workout</span><i>✦</i><span>Mass Gainer</span><i>✦</i><span>BCAA &amp; EAA</span><i>✦</i><span>Fat Burners</span><i>✦</i><span>Multivitamins</span><i>✦</i><span>Whey Protein</span><i>✦</i><span>Creatine</span><i>✦</i><span>Pre-Workout</span><i>✦</i><span>Mass Gainer</span><i>✦</i><span>BCAA &amp; EAA</span><i>✦</i><span>Fat Burners</span><i>✦</i><span>Multivitamins</span><i>✦</i><span>Whey Protein</span><i>✦</i><span>Creatine</span><i>✦</i><span>Pre-Workout</span><i>✦</i><span>Mass Gainer</span><i>✦</i><span>BCAA &amp; EAA</span><i>✦</i><span>Fat Burners</span><i>✦</i><span>Multivitamins</span><i>✦</i><span>Whey Protein</span><i>✦</i><span>Creatine</span><i>✦</i><span>Pre-Workout</span><i>✦</i><span>Mass Gainer</span><i>✦</i><span>BCAA &amp; EAA</span><i>✦</i><span>Fat Burners</span><i>✦</i><span>Multivitamins</span><i>✦</i></div>
+      </div>
+      <div class="band band--small">
+        <div class="band__track"><span>100% Genuine</span><i>—</i><span>Sealed &amp; Batch-Coded</span><i>—</i><span>Expert Advice</span><i>—</i><span>Fast Delivery</span><i>—</i><span>Outlets Across Malappuram</span><i>—</i><span>100% Genuine</span><i>—</i><span>Sealed &amp; Batch-Coded</span><i>—</i><span>Expert Advice</span><i>—</i><span>Fast Delivery</span><i>—</i><span>Outlets Across Malappuram</span><i>—</i><span>100% Genuine</span><i>—</i><span>Sealed &amp; Batch-Coded</span><i>—</i><span>Expert Advice</span><i>—</i><span>Fast Delivery</span><i>—</i><span>Outlets Across Malappuram</span><i>—</i><span>100% Genuine</span><i>—</i><span>Sealed &amp; Batch-Coded</span><i>—</i><span>Expert Advice</span><i>—</i><span>Fast Delivery</span><i>—</i><span>Outlets Across Malappuram</span><i>—</i></div>
+      </div>
+    </div>
+
+    <!-- STATS: real numbers from the page, counted up as they arrive -->
+    <section class="stats" aria-labelledby="statsTitle">
+      <h2 class="visually-hidden" id="statsTitle">Fuel X Pro in numbers</h2>
+      <div class="frame stats__grid">
+        <div class="stat"><strong data-count="100" data-suffix="%">100%</strong><span>Authentic products, sealed and batch-coded</span></div>
+        <div class="stat"><strong data-count="5" data-pad="2" data-outlet-count>05</strong><span>Outlets across Malappuram district</span></div>
+        <div class="stat"><strong data-count="7" data-pad="2">07</strong><span>Product ranges, from whey to fat burners</span></div>
+        <div class="stat"><strong data-count="4" data-pad="2">04</strong><span>Goal stacks, built around how you train</span></div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS: category tabs; picking one cross-fades the photo and swaps the text -->
+    <section class="products" id="products">
+      <div class="products__pin">
+        <div class="frame products__top">
+          <header class="section__head products__head">
+            <h2 class="section__title" data-lines>Everything you need<br>to perform</h2>
+            <p class="section__sub" data-r><strong>What we stock.</strong> Top brands, sealed and verified. Not sure what to pick? Message us and we'll recommend the right stack for you.</p>
+          </header>
+        </div>
+        <div class="frame ctabs">
+          <div class="ctabs__list" role="tablist" aria-label="Product categories">
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-0" aria-controls="ctabs-panel" aria-selected="true" tabindex="0" data-i="0" data-cat="protein" data-desc="ON Gold Standard, GNC Pro Performance, MuscleBlaze Biozyme, BPI Whey HD, Evogen Isoject, Isopure and CBUM Itholate.">Whey Protein</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-1" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="1" data-cat="preworkout" data-desc="Blood Lock, Joker Jackpro, Evogen EVP 3D and Optima Glyco Pump, for energy, focus and pump.">Pre-Workout</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-2" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="2" data-cat="strength" data-desc="GNC Pro micronised monohydrate, the most researched supplement for strength and power.">Creatine</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-3" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="3" data-cat="strength" data-desc="Mass Optima in 1, 2.7 and 5 kg, for hard-gainers building size and weight.">Mass Gainers</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-4" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="4" data-cat="strength" data-desc="Optima EAA with electrolytes, for endurance, hydration and less soreness.">BCAA &amp; EAA</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-5" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="5" data-cat="fatloss" data-desc="Nutrex Lipo-6, L-Carnitine liquids from GNC and Optima, and CLA for cutting phases.">Fat Loss</button>
+            <button type="button" class="ctabs__tab" role="tab" id="ctab-6" aria-controls="ctabs-panel" aria-selected="false" tabindex="-1" data-i="6" data-cat="health" data-desc="GNC Fish Oil, Vital Proteins Collagen, multivitamins and everyday essentials.">Vitamins &amp; Wellness</button>
+          </div>
+          <div class="ctabs__view" id="ctabs-panel" role="tabpanel" aria-labelledby="ctab-0">
+            <div class="ctabs__pic">
+              <img src="assets/categories/whey.jpg" alt="Optimum Nutrition, MuscleBlaze and GNC whey protein" loading="lazy" class="is-active">
+              <img src="assets/categories/pre-workout.jpg" alt="Blood Lock, Optima Glyco Pump and Evogen EVP 3D pre-workouts" loading="lazy">
+              <img src="assets/categories/creatine.jpg" alt="GNC Pro Performance Creatine Monohydrate" loading="lazy">
+              <img src="assets/categories/mass-gainer.jpg" alt="Optima Labs Mass Optima gainer" loading="lazy">
+              <img src="assets/categories/bcaa-eaa.jpg" alt="Optima Labs EAA with electrolytes" loading="lazy">
+              <img src="assets/categories/fat-loss.jpg" alt="GNC L-Carnitine, Nutrex Lipo-6 Black and Optima L-Carnitine" loading="lazy">
+              <img src="assets/categories/vitamins.jpg" alt="Vital Proteins Collagen, GNC Fish Oil and Nutrex Alpha-T" loading="lazy">
+            </div>
+            <div class="ctabs__txt">
+              <span class="ctabs__num">01 / 07</span>
+              <h3 class="ctabs__name">Whey Protein</h3>
+              <p class="ctabs__desc">ON Gold Standard, GNC Pro Performance, MuscleBlaze Biozyme, BPI Whey HD, Evogen Isoject, Isopure and CBUM Itholate.</p>
+              <a class="ctabs__cta" href="#shop" data-shop-cat="protein">Shop now <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP: every product we stock, with filters and an order bag sent over WhatsApp -->
+    <section class="section shop" id="shop" aria-labelledby="shopTitle">
+      <div class="frame">
+        <header class="section__head shop__head">
+          <h2 class="section__title" id="shopTitle" data-lines>Shop the shelf</h2>
+          <p class="section__sub" data-r><strong>34 products in stock.</strong> Add what you need to your order, choose the flavour, and send it to us. We reply with prices and delivery.</p>
+        </header>
+        <div class="shop__bar">
+          <label class="shop__search">
+            <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span class="visually-hidden">Search products</span>
+            <input type="search" placeholder="Search whey, creatine, Nutrex…" autocomplete="off">
+          </label>
+          <label class="shop__brand">
+            <span class="visually-hidden">Brand</span>
+            <select>
+              <option value="">All brands</option>
+              <option value="BPI Sports">BPI Sports</option>
+              <option value="Blood Lock">Blood Lock</option>
+              <option value="Chike">Chike</option>
+              <option value="Evogen">Evogen</option>
+              <option value="GNC">GNC</option>
+              <option value="Isopure">Isopure</option>
+              <option value="Jacked Army">Jacked Army</option>
+              <option value="MuscleBlaze">MuscleBlaze</option>
+              <option value="Nutrex">Nutrex</option>
+              <option value="Optima Labs">Optima Labs</option>
+              <option value="Optimum Nutrition">Optimum Nutrition</option>
+              <option value="RAW">RAW</option>
+              <option value="Vital Proteins">Vital Proteins</option>
+            </select>
+          </label>
+        </div>
+        <div class="shop__chips" role="group" aria-label="Category">
+            <button type="button" class="shop__chip" data-cat="all" aria-pressed="true">All</button>
+            <button type="button" class="shop__chip" data-cat="protein" aria-pressed="false">Protein</button>
+            <button type="button" class="shop__chip" data-cat="preworkout" aria-pressed="false">Pre-workout</button>
+            <button type="button" class="shop__chip" data-cat="strength" aria-pressed="false">Creatine &amp; gainers</button>
+            <button type="button" class="shop__chip" data-cat="fatloss" aria-pressed="false">Fat loss</button>
+            <button type="button" class="shop__chip" data-cat="health" aria-pressed="false">Health</button>
+        </div>
+        <p class="shop__count" aria-live="polite"><span>34</span> products</p>
+        <ul class="shop__grid">
+          <li class="prod" data-id="on-gold-standard" data-cat="protein" data-brand="Optimum Nutrition" data-name="Optimum Nutrition Gold Standard 100% Whey">
+            <div class="prod__media"><img src="assets/shop/on-gold-standard.jpg?v=2" alt="Optimum Nutrition Gold Standard 100% Whey" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optimum Nutrition</p>
+              <h3 class="prod__name">Gold Standard 100% Whey</h3>
+              <p class="prod__spec">24 g protein · 5.5 g BCAA · 2.48 kg</p>
+              <p class="prod__flavour prod__flavour--one">Vanilla Ice Cream</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optimum Nutrition Gold Standard 100% Whey to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optimum Nutrition Gold Standard 100% Whey">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optimum Nutrition Gold Standard 100% Whey">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="mb-performance-whey" data-cat="protein" data-brand="MuscleBlaze" data-name="MuscleBlaze Biozyme Performance Whey">
+            <div class="prod__media"><img src="assets/shop/mb-performance-whey.jpg" alt="MuscleBlaze Biozyme Performance Whey" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">MuscleBlaze</p>
+              <h3 class="prod__name">Biozyme Performance Whey</h3>
+              <p class="prod__spec">25 g protein · 1 kg &amp; 2 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for MuscleBlaze Biozyme Performance Whey</span><select><option>Rich Chocolate</option><option>Chocolate Hazelnut</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add MuscleBlaze Biozyme Performance Whey to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less MuscleBlaze Biozyme Performance Whey">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more MuscleBlaze Biozyme Performance Whey">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="gnc-whey" data-cat="protein" data-brand="GNC" data-name="GNC Pro Performance 100% Whey">
+            <div class="prod__media"><img src="assets/shop/gnc-whey.jpg" alt="GNC Pro Performance 100% Whey" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">GNC</p>
+              <h3 class="prod__name">Pro Performance 100% Whey</h3>
+              <p class="prod__spec">24 g protein · 11.4 g EAA · 1.81 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for GNC Pro Performance 100% Whey</span><select><option>Vanilla Cream</option><option>Mawa Kulfi</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add GNC Pro Performance 100% Whey to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less GNC Pro Performance 100% Whey">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more GNC Pro Performance 100% Whey">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="evogen-isoject" data-cat="protein" data-brand="Evogen" data-name="Evogen Isoject Whey Isolate">
+            <div class="prod__media"><img src="assets/shop/evogen-isoject.jpg" alt="Evogen Isoject Whey Isolate" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Evogen</p>
+              <h3 class="prod__name">Isoject Whey Isolate</h3>
+              <p class="prod__spec">25 g protein · 12.6 g EAA</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Evogen Isoject Whey Isolate</span><select><option>S&#x27;mores</option><option>Oatmeal Cookie</option><option>Chocolate</option><option>Vanilla Bean</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Evogen Isoject Whey Isolate to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Evogen Isoject Whey Isolate">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Evogen Isoject Whey Isolate">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="mb-iso-zero-a" data-cat="protein" data-brand="MuscleBlaze" data-name="MuscleBlaze Biozyme Iso Zero">
+            <div class="prod__media"><img src="assets/shop/mb-iso-zero-a.jpg" alt="MuscleBlaze Biozyme Iso Zero" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">MuscleBlaze</p>
+              <h3 class="prod__name">Biozyme Iso Zero</h3>
+              <p class="prod__spec">27 g protein · 0 g added sugar · 2 kg</p>
+              <p class="prod__flavour prod__flavour--one">Ice Cream Chocolate</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add MuscleBlaze Biozyme Iso Zero to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less MuscleBlaze Biozyme Iso Zero">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more MuscleBlaze Biozyme Iso Zero">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="bpi-whey-hd" data-cat="protein" data-brand="BPI Sports" data-name="BPI Sports Whey HD">
+            <div class="prod__media"><img src="assets/shop/bpi-whey-hd.jpg" alt="BPI Sports Whey HD" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">BPI Sports</p>
+              <h3 class="prod__name">Whey HD</h3>
+              <p class="prod__spec">25 g protein · 1 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for BPI Sports Whey HD</span><select><option>Chocolate Delight</option><option>Cookies &amp; Cream</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add BPI Sports Whey HD to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less BPI Sports Whey HD">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more BPI Sports Whey HD">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-whey" data-cat="protein" data-brand="Optima Labs" data-name="Optima Labs Whey Optima">
+            <div class="prod__media"><img src="assets/shop/optima-whey.jpg" alt="Optima Labs Whey Optima" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">Whey Optima</h3>
+              <p class="prod__spec">24 g protein · 4.2 g BCAA · 2.27 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs Whey Optima</span><select><option>Chocolate</option><option>Mango</option><option>Coffee</option><option>Milky Delight</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs Whey Optima to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs Whey Optima">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs Whey Optima">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-iso" data-cat="protein" data-brand="Optima Labs" data-name="Optima Labs Iso Optima">
+            <div class="prod__media"><img src="assets/shop/optima-iso.jpg" alt="Optima Labs Iso Optima" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">Iso Optima</h3>
+              <p class="prod__spec">25 g protein · 0 g sugar · 2.7 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs Iso Optima</span><select><option>Chocolate</option><option>Coffee</option><option>Strawberry</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs Iso Optima to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs Iso Optima">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs Iso Optima">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="mb-iso-zero-b" data-cat="protein" data-brand="MuscleBlaze" data-name="MuscleBlaze Biozyme Iso-Zero Low Carb">
+            <div class="prod__media"><img src="assets/shop/mb-iso-zero-b.jpg" alt="MuscleBlaze Biozyme Iso-Zero Low Carb" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">MuscleBlaze</p>
+              <h3 class="prod__name">Biozyme Iso-Zero Low Carb</h3>
+              <p class="prod__spec">27 g protein · 1 kg</p>
+              <p class="prod__flavour prod__flavour--one">Ice Cream Chocolate</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add MuscleBlaze Biozyme Iso-Zero Low Carb to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less MuscleBlaze Biozyme Iso-Zero Low Carb">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more MuscleBlaze Biozyme Iso-Zero Low Carb">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="isopure-zero-carb" data-cat="protein" data-brand="Isopure" data-name="Isopure Zero Carb Whey Isolate">
+            <div class="prod__media"><img src="assets/shop/isopure-zero-carb.jpg?v=2" alt="Isopure Zero Carb Whey Isolate" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Isopure</p>
+              <h3 class="prod__name">Zero Carb Whey Isolate</h3>
+              <p class="prod__spec">25 g protein · 0 g carbs · 671 g</p>
+              <p class="prod__flavour prod__flavour--one">Simply Vanilla</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Isopure Zero Carb Whey Isolate to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Isopure Zero Carb Whey Isolate">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Isopure Zero Carb Whey Isolate">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="raw-cbum-itholate" data-cat="protein" data-brand="RAW" data-name="RAW CBUM Itholate Protein">
+            <div class="prod__media"><img src="assets/shop/raw-cbum-itholate.jpg" alt="RAW CBUM Itholate Protein" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">RAW</p>
+              <h3 class="prod__name">CBUM Itholate Protein</h3>
+              <p class="prod__spec">25 g protein · 25 servings</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for RAW CBUM Itholate Protein</span><select><option>Birthday Cake</option><option>Fudge Brownie</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add RAW CBUM Itholate Protein to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less RAW CBUM Itholate Protein">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more RAW CBUM Itholate Protein">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="evogen-evofusion" data-cat="protein" data-brand="Evogen" data-name="Evogen Evofusion Protein Matrix">
+            <div class="prod__media"><img src="assets/shop/evogen-evofusion.jpg?v=2" alt="Evogen Evofusion Protein Matrix" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Evogen</p>
+              <h3 class="prod__name">Evofusion Protein Matrix</h3>
+              <p class="prod__spec">24 g protein · 1.82 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Evogen Evofusion Protein Matrix</span><select><option>Vanilla Bean Ice Cream</option><option>Chocolate Shake</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Evogen Evofusion Protein Matrix to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Evogen Evofusion Protein Matrix">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Evogen Evofusion Protein Matrix">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="chike-iced-coffee" data-cat="protein" data-brand="Chike" data-name="Chike Protein Iced Coffee">
+            <div class="prod__media"><img src="assets/shop/chike-iced-coffee.jpg?v=2" alt="Chike Protein Iced Coffee" loading="lazy" width="800" height="800"><span class="prod__tag">Protein</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Chike</p>
+              <h3 class="prod__name">Protein Iced Coffee</h3>
+              <p class="prod__spec">20 g whey · 2 espresso shots</p>
+              <p class="prod__flavour prod__flavour--one">Mocha</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Chike Protein Iced Coffee to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Chike Protein Iced Coffee">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Chike Protein Iced Coffee">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="bloodlock-final-destination" data-cat="preworkout" data-brand="Blood Lock" data-name="Blood Lock Final Destination">
+            <div class="prod__media"><img src="assets/shop/bloodlock-final-destination.jpg" alt="Blood Lock Final Destination" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Blood Lock</p>
+              <h3 class="prod__name">Final Destination</h3>
+              <p class="prod__spec">Stim loaded · 60 servings</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Blood Lock Final Destination</span><select><option>Blueberry</option><option>Peach Candy</option><option>Fruit Punch</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Blood Lock Final Destination to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Blood Lock Final Destination">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Blood Lock Final Destination">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-glyco-pump" data-cat="preworkout" data-brand="Optima Labs" data-name="Optima Labs Glyco Pump">
+            <div class="prod__media"><img src="assets/shop/optima-glyco-pump.jpg" alt="Optima Labs Glyco Pump" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">Glyco Pump</h3>
+              <p class="prod__spec">50 servings · 400 g</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs Glyco Pump</span><select><option>Cherry Pineapple</option><option>Fruit Bear</option><option>Mint Mojito</option><option>Peach Ice Tea</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs Glyco Pump to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs Glyco Pump">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs Glyco Pump">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="joker-jackpro" data-cat="preworkout" data-brand="Jacked Army" data-name="Jacked Army Joker Jackpro">
+            <div class="prod__media"><img src="assets/shop/joker-jackpro.jpg" alt="Jacked Army Joker Jackpro" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Jacked Army</p>
+              <h3 class="prod__name">Joker Jackpro</h3>
+              <p class="prod__spec">The Nightmare pre-workout</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Jacked Army Joker Jackpro to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Jacked Army Joker Jackpro">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Jacked Army Joker Jackpro">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="evogen-evp3d" data-cat="preworkout" data-brand="Evogen" data-name="Evogen EVP 3D">
+            <div class="prod__media"><img src="assets/shop/evogen-evp3d.jpg" alt="Evogen EVP 3D" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Evogen</p>
+              <h3 class="prod__name">EVP 3D</h3>
+              <p class="prod__spec">Stim-free pump · nitrate</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Evogen EVP 3D</span><select><option>Blueberry Apple</option><option>Strawberry Lemonade</option><option>Sour Watermelon</option><option>Peach Rings</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Evogen EVP 3D to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Evogen EVP 3D">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Evogen EVP 3D">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="bloodlock-xtreme" data-cat="preworkout" data-brand="Blood Lock" data-name="Blood Lock Xtreme">
+            <div class="prod__media"><img src="assets/shop/bloodlock-xtreme.jpg" alt="Blood Lock Xtreme" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Blood Lock</p>
+              <h3 class="prod__name">Xtreme</h3>
+              <p class="prod__spec">60 servings</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Blood Lock Xtreme</span><select><option>Cotton Candy</option><option>Cola Lime</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Blood Lock Xtreme to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Blood Lock Xtreme">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Blood Lock Xtreme">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-niox" data-cat="preworkout" data-brand="Nutrex" data-name="Nutrex Niox Nitric Oxide">
+            <div class="prod__media"><img src="assets/shop/nutrex-niox.jpg" alt="Nutrex Niox Nitric Oxide" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Niox Nitric Oxide</h3>
+              <p class="prod__spec">Blood flow · 90 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Niox Nitric Oxide to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Niox Nitric Oxide">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Niox Nitric Oxide">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-l-arginine" data-cat="preworkout" data-brand="Nutrex" data-name="Nutrex L-Arginine 1000">
+            <div class="prod__media"><img src="assets/shop/nutrex-l-arginine.jpg" alt="Nutrex L-Arginine 1000" loading="lazy" width="800" height="800"><span class="prod__tag">Pre-workout</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">L-Arginine 1000</h3>
+              <p class="prod__spec">Nitric oxide · 120 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex L-Arginine 1000 to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex L-Arginine 1000">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex L-Arginine 1000">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="gnc-creatine" data-cat="strength" data-brand="GNC" data-name="GNC Pro Performance Creatine">
+            <div class="prod__media"><img src="assets/shop/gnc-creatine.jpg" alt="GNC Pro Performance Creatine" loading="lazy" width="800" height="800"><span class="prod__tag">Creatine &amp; gainers</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">GNC</p>
+              <h3 class="prod__name">Pro Performance Creatine</h3>
+              <p class="prod__spec">3 g per scoop · 250 g</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for GNC Pro Performance Creatine</span><select><option>Cranberry</option><option>Blueberry</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add GNC Pro Performance Creatine to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less GNC Pro Performance Creatine">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more GNC Pro Performance Creatine">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-mass" data-cat="strength" data-brand="Optima Labs" data-name="Optima Labs Mass Optima">
+            <div class="prod__media"><img src="assets/shop/optima-mass.jpg" alt="Optima Labs Mass Optima" loading="lazy" width="800" height="800"><span class="prod__tag">Creatine &amp; gainers</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">Mass Optima</h3>
+              <p class="prod__spec">22 g protein · 1, 2.7 &amp; 5 kg</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs Mass Optima</span><select><option>Chocolate</option><option>Milky Delight</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs Mass Optima to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs Mass Optima">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs Mass Optima">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-eaa" data-cat="strength" data-brand="Optima Labs" data-name="Optima Labs EAA + Electrolytes">
+            <div class="prod__media"><img src="assets/shop/optima-eaa.jpg" alt="Optima Labs EAA + Electrolytes" loading="lazy" width="800" height="800"><span class="prod__tag">Creatine &amp; gainers</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">EAA + Electrolytes</h3>
+              <p class="prod__spec">4000 mg EAA · 40 servings</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs EAA + Electrolytes</span><select><option>Juicy Orange</option><option>Mango</option><option>Pineapple</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs EAA + Electrolytes to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs EAA + Electrolytes">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs EAA + Electrolytes">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-lipo6-black" data-cat="fatloss" data-brand="Nutrex" data-name="Nutrex Lipo-6 Black Ultra Concentrate">
+            <div class="prod__media"><img src="assets/shop/nutrex-lipo6-black.jpg" alt="Nutrex Lipo-6 Black Ultra Concentrate" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Lipo-6 Black Ultra Concentrate</h3>
+              <p class="prod__spec">Fat burner · 60 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Lipo-6 Black Ultra Concentrate to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Lipo-6 Black Ultra Concentrate">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Lipo-6 Black Ultra Concentrate">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-lipo6-hardcore" data-cat="fatloss" data-brand="Nutrex" data-name="Nutrex Lipo-6 Hardcore">
+            <div class="prod__media"><img src="assets/shop/nutrex-lipo6-hardcore.jpg" alt="Nutrex Lipo-6 Hardcore" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Lipo-6 Hardcore</h3>
+              <p class="prod__spec">Fat burner · 60 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Lipo-6 Hardcore to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Lipo-6 Hardcore">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Lipo-6 Hardcore">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-lipo6-nighttime" data-cat="fatloss" data-brand="Nutrex" data-name="Nutrex Lipo-6 Nighttime">
+            <div class="prod__media"><img src="assets/shop/nutrex-lipo6-nighttime.jpg" alt="Nutrex Lipo-6 Nighttime" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Lipo-6 Nighttime</h3>
+              <p class="prod__spec">Night-time fat burner · 30 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Lipo-6 Nighttime to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Lipo-6 Nighttime">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Lipo-6 Nighttime">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-l-carnitine" data-cat="fatloss" data-brand="Optima Labs" data-name="Optima Labs Liquid L-Carnitine 5000">
+            <div class="prod__media"><img src="assets/shop/optima-l-carnitine.jpg" alt="Optima Labs Liquid L-Carnitine 5000" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">Liquid L-Carnitine 5000</h3>
+              <p class="prod__spec">5000 mg · 500 ml</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs Liquid L-Carnitine 5000</span><select><option>Pineapple Mango</option><option>Juicy Orange</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs Liquid L-Carnitine 5000 to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs Liquid L-Carnitine 5000">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs Liquid L-Carnitine 5000">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="optima-cla-carnitine" data-cat="fatloss" data-brand="Optima Labs" data-name="Optima Labs CLA + L-Carnitine">
+            <div class="prod__media"><img src="assets/shop/optima-cla-carnitine.jpg" alt="Optima Labs CLA + L-Carnitine" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Optima Labs</p>
+              <h3 class="prod__name">CLA + L-Carnitine</h3>
+              <p class="prod__spec">2000 + 3000 mg · 450 ml</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for Optima Labs CLA + L-Carnitine</span><select><option>Pineapple Mango</option><option>Juicy Orange</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Optima Labs CLA + L-Carnitine to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Optima Labs CLA + L-Carnitine">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Optima Labs CLA + L-Carnitine">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="gnc-l-carnitine" data-cat="fatloss" data-brand="GNC" data-name="GNC Total Lean L-Carnitine Liquid">
+            <div class="prod__media"><img src="assets/shop/gnc-l-carnitine.jpg" alt="GNC Total Lean L-Carnitine Liquid" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">GNC</p>
+              <h3 class="prod__name">Total Lean L-Carnitine Liquid</h3>
+              <p class="prod__spec">3000 mg · 450 ml</p>
+              <label class="prod__flavour"><span class="visually-hidden">Flavour for GNC Total Lean L-Carnitine Liquid</span><select><option>Orange</option><option>Strawberry Kiwi</option></select></label>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add GNC Total Lean L-Carnitine Liquid to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less GNC Total Lean L-Carnitine Liquid">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more GNC Total Lean L-Carnitine Liquid">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-carnitine-3000" data-cat="fatloss" data-brand="Nutrex" data-name="Nutrex Liquid L-Carnitine 3000">
+            <div class="prod__media"><img src="assets/shop/nutrex-carnitine-3000.jpg" alt="Nutrex Liquid L-Carnitine 3000" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Liquid L-Carnitine 3000</h3>
+              <p class="prod__spec">31 servings</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Liquid L-Carnitine 3000 to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Liquid L-Carnitine 3000">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Liquid L-Carnitine 3000">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-l-carnitine-1000" data-cat="fatloss" data-brand="Nutrex" data-name="Nutrex L-Carnitine 1000">
+            <div class="prod__media"><img src="assets/shop/nutrex-l-carnitine-1000.jpg" alt="Nutrex L-Carnitine 1000" loading="lazy" width="800" height="800"><span class="prod__tag">Fat loss</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">L-Carnitine 1000</h3>
+              <p class="prod__spec">60 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex L-Carnitine 1000 to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex L-Carnitine 1000">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex L-Carnitine 1000">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="gnc-fish-oil" data-cat="health" data-brand="GNC" data-name="GNC Fish Oil 1000 mg">
+            <div class="prod__media"><img src="assets/shop/gnc-fish-oil.jpg?v=2" alt="GNC Fish Oil 1000 mg" loading="lazy" width="800" height="800"><span class="prod__tag">Health</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">GNC</p>
+              <h3 class="prod__name">Fish Oil 1000 mg</h3>
+              <p class="prod__spec">Omega-3 · 60 softgels</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add GNC Fish Oil 1000 mg to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less GNC Fish Oil 1000 mg">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more GNC Fish Oil 1000 mg">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="vital-proteins-collagen" data-cat="health" data-brand="Vital Proteins" data-name="Vital Proteins Collagen Peptides">
+            <div class="prod__media"><img src="assets/shop/vital-proteins-collagen.jpg?v=2" alt="Vital Proteins Collagen Peptides" loading="lazy" width="800" height="800"><span class="prod__tag">Health</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Vital Proteins</p>
+              <h3 class="prod__name">Collagen Peptides</h3>
+              <p class="prod__spec">20 g collagen · limited edition</p>
+              <p class="prod__flavour prod__flavour--one">Ice Pop</p>
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Vital Proteins Collagen Peptides to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Vital Proteins Collagen Peptides">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Vital Proteins Collagen Peptides">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="prod" data-id="nutrex-alpha-t" data-cat="health" data-brand="Nutrex" data-name="Nutrex Alpha-T Magnum">
+            <div class="prod__media"><img src="assets/shop/nutrex-alpha-t.jpg" alt="Nutrex Alpha-T Magnum" loading="lazy" width="800" height="800"><span class="prod__tag">Health</span></div>
+            <div class="prod__body">
+              <p class="prod__brand">Nutrex</p>
+              <h3 class="prod__name">Alpha-T Magnum</h3>
+              <p class="prod__spec">Men’s support · 120 capsules</p>
+              
+              <div class="prod__foot">
+                <span class="prod__price">Price on request</span>
+                <div class="prod__buy">
+                  <button type="button" class="prod__add" aria-label="Add Nutrex Alpha-T Magnum to order">Add<span aria-hidden="true"> +</span></button>
+                  <div class="prod__qty" hidden><button type="button" data-step="-1" aria-label="One less Nutrex Alpha-T Magnum">−</button><span aria-live="polite">1</span><button type="button" data-step="1" aria-label="One more Nutrex Alpha-T Magnum">+</button></div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p class="shop__empty" hidden>No products match. Try another word, or <a href="https://wa.me/918921852071" target="_blank" rel="noopener" data-wa>ask us on WhatsApp</a>, we may have it in store.</p>
+        <button type="button" class="btn btn--ghost shop__more" hidden><span>Show more</span></button>
+      </div>
+    </section>
+
+    <!-- ORDER BAG: floating button + side panel; the order is sent as a message -->
+    <button type="button" class="bag-fab" aria-controls="bag" aria-expanded="false" hidden>
+      <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="bag-fab__label">Your order</span><span class="bag-fab__count">0</span>
+    </button>
+    <aside class="bag" id="bag" aria-labelledby="bagTitle" hidden>
+      <div class="bag__scrim" data-bag-close></div>
+      <div class="bag__panel" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="bagTitle">
+        <header class="bag__head">
+          <h2 class="bag__title" id="bagTitle">Your order</h2>
+          <button type="button" class="bag__close" data-bag-close aria-label="Close order">×</button>
+        </header>
+        <ul class="bag__list"></ul>
+        <p class="bag__empty">Nothing added yet. Tap <strong>Add +</strong> on any product.</p>
+        <footer class="bag__foot">
+          <div class="bag__total"><span>Total</span><strong class="bag__total-value">—</strong></div>
+          <p class="bag__total-note" hidden></p>
+          <form class="bag__form" novalidate>
+            <label class="field">
+              <span class="field__label">Your name</span>
+              <input type="text" name="name" autocomplete="name" required>
+              <span class="field__error" hidden>Please add your name.</span>
+            </label>
+            <fieldset class="field field--choice">
+              <legend class="field__label">How do you want it?</legend>
+              <label class="choice"><input type="radio" name="method" value="pickup" checked><span>Pick up at an outlet</span></label>
+              <label class="choice"><input type="radio" name="method" value="delivery"><span>Home delivery</span></label>
+            </fieldset>
+            <label class="field" data-show="pickup">
+              <span class="field__label">Outlet</span>
+              <select name="outlet"><option value="">Choose an outlet</option></select>
+              <span class="field__error" hidden>Please choose an outlet.</span>
+            </label>
+            <label class="field" data-show="delivery" hidden>
+              <span class="field__label">Delivery address</span>
+              <textarea name="address" rows="2" autocomplete="street-address"></textarea>
+              <span class="field__error" hidden>Please add your address.</span>
+            </label>
+            <label class="field">
+              <span class="field__label">Note <i>(optional)</i></span>
+              <input type="text" name="note" placeholder="e.g. call before delivery">
+            </label>
+          </form>
+          <a class="btn btn--accent bag__wa" href="https://wa.me/918921852071" target="_blank" rel="noopener" data-wa><span><svg viewBox="0 0 32 32" class="ico ico--wa" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg>Send order on WhatsApp</span></a>
+          <p class="bag__note">We'll confirm stock, price and delivery on WhatsApp. No payment is taken on this site.</p>
+          <button type="button" class="bag__clear">Clear order</button>
+        </footer>
+      </div>
+    </aside>
+    <div class="toast" role="status" aria-live="polite" hidden>
+      <span class="toast__text">Added to your order</span>
+      <button type="button" class="toast__view">View order</button>
+    </div>
+
+    <!-- SPIN: a big statement while the badge turns with the scroll -->
+    <section class="spin" aria-labelledby="spinTitle">
+      <div class="frame spin__stage">
+        <h2 class="spin__title" id="spinTitle"><span>Genuine.</span> <span>Sealed.</span> <span>Verified.</span></h2>
+        <div class="spin__product" aria-hidden="true">
+          <svg class="spin__x" viewBox="0 0 1000 1000"><polygon points="140,0 410,0 860,1000 590,1000"/><polygon points="590,0 860,0 410,1000 140,1000"/></svg>
+          <div class="spin__logo">
+            <img src="assets/logo-dark.png" alt="" class="logo-on-light">
+            <img src="assets/logo-light.png" alt="" class="logo-on-dark">
+            <span class="spin__shine"></span>
+          </div>
+        </div>
+        <p class="spin__note">Sourced from authorised channels. Sealed, batch-coded and verifiable — so what you take is exactly what it says on the tub.</p>
+      </div>
+    </section>
+
+    <!-- GOALS: a full field of the accent; pick a goal, read its stack -->
+    <section class="section goals" id="goals">
+      <div class="frame">
+        <header class="section__head goals__head">
+          <h2 class="section__title" data-lines>What are you<br>training for?</h2>
+          <p class="section__sub" data-r><strong>Shop by goal.</strong> Tap a goal to see the stack we usually recommend.</p>
+        </header>
+
+        <div class="goals__tabs" role="tablist" aria-label="Training goal" data-r>
+          <button class="goal-tab is-active" role="tab" aria-selected="true" aria-controls="goalPanel" data-goal="muscle">Build Muscle</button>
+          <button class="goal-tab" role="tab" aria-selected="false" aria-controls="goalPanel" data-goal="fat" tabindex="-1">Lose Fat</button>
+          <button class="goal-tab" role="tab" aria-selected="false" aria-controls="goalPanel" data-goal="perform" tabindex="-1">Performance</button>
+          <button class="goal-tab" role="tab" aria-selected="false" aria-controls="goalPanel" data-goal="health" tabindex="-1">Everyday Health</button>
+        </div>
+
+        <div class="goals__panel" id="goalPanel" role="tabpanel" data-r>
+          <div class="goals__text">
+            <h3 id="goalTitle">Build Muscle</h3>
+            <p id="goalDesc">Hit your protein target, train with progressive overload and recover properly. This stack covers the basics.</p>
+            <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="btn btn--ink" id="goalOrder" data-wa><span><svg viewBox="0 0 32 32" class="ico ico--wa" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg>Order this stack</span></a>
+          </div>
+          <table class="stack">
+            <caption class="visually-hidden">Recommended stack for the selected goal</caption>
+            <thead><tr><th scope="col">Supplement</th><th scope="col">How we use it</th></tr></thead>
+            <tbody id="goalStack">
+              <tr><td>Whey Protein</td><td>25–30g post-workout to hit daily protein</td></tr>
+              <tr><td>Creatine Monohydrate</td><td>3–5g daily for strength and size</td></tr>
+              <tr><td>Mass Gainer</td><td>For hard-gainers struggling to eat enough calories</td></tr>
+              <tr><td>Multivitamin</td><td>Cover micronutrient gaps while you grow</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COACH -->
+    <section class="section coach" id="coach">
+      <div class="frame coach__grid">
+        <figure class="coach__figure" data-r>
+          <div class="slant coach__photo"><img src="assets/photos/sandow-1894.jpg" alt="Eugen Sandow posing, about 1894" loading="lazy"></div>
+          <div class="coach__badge"><img src="assets/logo-badge.png" alt="Fuel X Pro Nutrition badge" loading="lazy"></div>
+          <figcaption>Eugen Sandow, about 1894. The classic pose behind our badge.</figcaption>
+        </figure>
+        <div class="coach__copy">
+          <h2 class="section__title" data-lines>Not just a store.<br>A coach in your corner.</h2>
+          <p data-r><strong>The face behind the brand.</strong>
+            Fuel X Pro Nutrition was built on one idea: the right supplement only works with the right
+            guidance. Every order comes with real advice — what to take, when to take it and how to
+            pair it with your diet and training.
+          </p>
+          <ul class="checks">
+            <li data-r>Personalised supplement recommendations</li>
+            <li data-r>Diet and macro guidance for your goal</li>
+            <li data-r>Honest advice — no unnecessary upselling</li>
+            <li data-r>Ongoing support on Instagram &amp; DM</li>
+          </ul>
+          <a href="https://www.instagram.com/fuelxpro__nutrition" target="_blank" rel="noopener" class="btn btn--ghost" data-r><span>Follow @fuelxpro__nutrition</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY: one photograph across the whole width, the four reasons set on it -->
+    <section class="why" id="why">
+      <div class="why__photo"><img src="assets/photos/dumbbell-rack.jpg" alt="Dumbbells lined up on a gym rack" loading="lazy"></div>
+      <div class="frame why__inner">
+        <header class="section__head">
+          <h2 class="section__title" data-lines>Built on trust</h2>
+          <p class="section__sub" data-r><strong>Why Fuel X Pro.</strong> Four promises behind every tub we hand over.</p>
+        </header>
+        <div class="why__list">
+          <div class="why__item" data-r>
+            <h3>Genuine Products</h3>
+            <p>Sourced from authorised channels. Sealed, batch-coded and verifiable.</p>
+          </div>
+          <div class="why__item" data-r>
+            <h3>Expert Advice</h3>
+            <p>Guidance from someone who lives the lifestyle — not a script.</p>
+          </div>
+          <div class="why__item" data-r>
+            <h3>Fair Pricing</h3>
+            <p>Competitive prices and regular offers for our community.</p>
+          </div>
+          <div class="why__item" data-r>
+            <h3>Quick Delivery</h3>
+            <p>Fast dispatch so you never miss a scoop.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO ORDER: three steps joined by one slanted bar that fills as you scroll -->
+    <section class="section order" id="order">
+      <div class="frame order__grid">
+        <header class="section__head order__head">
+          <h2 class="section__title" data-lines>Three steps<br>to fuelled</h2>
+          <p class="section__sub" data-r><strong>How to order.</strong> No checkout, no forms — just a message.</p>
+          <figure class="order__figure slant" data-r>
+            <img src="assets/photos/hex-dumbbells.jpg" alt="Hex dumbbells on a rack" loading="lazy">
+          </figure>
+        </header>
+        <div class="steps-wrap">
+        <span class="steps__bar" aria-hidden="true"><span></span></span>
+        <ol class="steps">
+          <li class="step" data-r>
+            <h3>Send a message</h3>
+            <p>WhatsApp us your goal or the products you want, or send your order straight from the shop.</p>
+          </li>
+          <li class="step" data-r>
+            <h3>Get your stack</h3>
+            <p>We confirm availability, price and suggest what fits you best.</p>
+          </li>
+          <li class="step" data-r>
+            <h3>Train harder</h3>
+            <p>Your order is packed and delivered. Then the work begins.</p>
+          </li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT: a simple grid of outlets -->
+    <section class="section visit" id="visit">
+      <div class="frame">
+        <header class="section__head">
+          <h2 class="section__title" data-lines>Our outlets.<br>One mission.</h2>
+          <p class="section__sub" data-r><strong>Visit our outlets.</strong> Walk in, check the products in person and get advice face to face.</p>
+        </header>
+        <ul class="outlets">
+            <li class="outlet" data-r>
+              <h3 class="outlet__name">Kottakkal</h3>
+              <p class="outlet__addr"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>FuelX Nutrition, B.H. Road, near Dhanalakshmi Bank, Kottakkal, Kerala 676503</span></p>
+              <p class="outlet__links">
+                <a href="https://www.google.com/maps?q=FUELX+NUTRITION,+B.H.+Rd,+near+DHANALAKSHMI+BANK,+Kottakkal,+Keralam+676503" target="_blank" rel="noopener" class="outlet__link">Get directions <span aria-hidden="true">→</span></a>
+                <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="outlet__link" data-wa>WhatsApp <span aria-hidden="true">→</span></a>
+              </p>
+            </li>
+            <li class="outlet" data-r>
+              <h3 class="outlet__name">Puthanathani</h3>
+              <p class="outlet__addr"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>FuelX Nutrition, near HDFC Bank, Puthanathani, Kerala 676551</span></p>
+              <p class="outlet__links">
+                <a href="https://www.google.com/maps?q=FUELX+NUTRITION,+near+hdfc+bank,+Puthanathani,+Keralam+676551" target="_blank" rel="noopener" class="outlet__link">Get directions <span aria-hidden="true">→</span></a>
+                <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="outlet__link" data-wa>WhatsApp <span aria-hidden="true">→</span></a>
+              </p>
+            </li>
+            <li class="outlet" data-r>
+              <h3 class="outlet__name">Malappuram</h3>
+              <p class="outlet__addr"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>FuelX Nutrition, near Rose Lounge Auditorium, Malappuram, Kerala 676504</span></p>
+              <p class="outlet__links">
+                <a href="https://www.google.com/maps?q=FUELX+NUTRITION,+ROSE+LOUNGE+AUDITORIUM,+NEAR,+Malappuram,+Keralam+676504" target="_blank" rel="noopener" class="outlet__link">Get directions <span aria-hidden="true">→</span></a>
+                <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="outlet__link" data-wa>WhatsApp <span aria-hidden="true">→</span></a>
+              </p>
+            </li>
+            <li class="outlet" data-r>
+              <h3 class="outlet__name">Vengara</h3>
+              <p class="outlet__addr"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>FuelX Nutrition, Cherur Road, Kazhukanchina, Vengara, Kerala 676304</span></p>
+              <p class="outlet__links">
+                <a href="https://www.google.com/maps?q=FUELX+NUTRITION,+CHERUR+ROAD,+Kazhukanchina,+Vengara,+Oorakam,+Keralam+676304" target="_blank" rel="noopener" class="outlet__link">Get directions <span aria-hidden="true">→</span></a>
+                <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="outlet__link" data-wa>WhatsApp <span aria-hidden="true">→</span></a>
+              </p>
+            </li>
+            <li class="outlet" data-r>
+              <h3 class="outlet__name">Tirur</h3>
+              <p class="outlet__addr"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>FuelX Nutrition, near Zudio, Tirur, Kerala 676105</span></p>
+              <p class="outlet__links">
+                <a href="https://www.google.com/maps?q=FUELX+NUTRITION,+near+ZUDIO,+Tirur,+Keralam+676105" target="_blank" rel="noopener" class="outlet__link">Get directions <span aria-hidden="true">→</span></a>
+                <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="outlet__link" data-wa>WhatsApp <span aria-hidden="true">→</span></a>
+              </p>
+            </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA: the accent field again, with the X stroke cropped at the edge -->
+    <section class="cta">
+      <svg class="cta__x" viewBox="0 0 1000 1000" aria-hidden="true"><polygon points="140,0 410,0 860,1000 590,1000"/><polygon points="590,0 860,0 410,1000 140,1000"/></svg>
+      <div class="frame cta__inner">
+        <h2 class="cta__title">Ready to <span class="nowrap">go <span class="circled">pro<svg class="circled__svg" viewBox="0 0 240 120" preserveAspectRatio="none" aria-hidden="true"><path d="M44 78C20 58 34 22 104 14c64-7 118 8 124 40 6 34-52 56-118 54C46 106 6 86 18 56 26 36 60 22 98 18"/></svg></span>?</span></h2>
+        <p data-r>Drop us a message and get your personalised recommendation today.</p>
+        <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="btn btn--ink" data-r data-wa>
+          <span><svg viewBox="0 0 32 32" class="ico ico--wa" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg>Order on WhatsApp</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: classic four columns on a tone step -->
+  <footer class="footer">
+    <div class="frame footer__top">
+      <div class="footer__brand">
+        <img src="assets/logo-dark.png" alt="Fuel X Pro Nutrition" class="footer__logo logo-on-light">
+        <img src="assets/logo-light.png" alt="Fuel X Pro Nutrition" class="footer__logo logo-on-dark">
+        <p class="footer__tag">Genuine sports supplements and honest nutrition advice, from our outlets across Malappuram.</p>
+        <a href="https://www.instagram.com/fuelxpro__nutrition" target="_blank" rel="noopener" class="footer__ig"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="fill"/></svg>@fuelxpro__nutrition</a>
+      </div>
+      <nav class="footer__col" aria-label="Footer">
+        <p class="footer__title">Explore</p>
+        <ul class="footer__list">
+          <li><a href="#products">Products</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#goals">Goals</a></li>
+          <li><a href="#coach">The Coach</a></li>
+          <li><a href="#order">How to Order</a></li>
+          <li><a href="#visit">Visit Us</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__title">Visit</p>
+        <ul class="footer__list">
+          <li><a href="https://www.google.com/maps?q=FUELX+NUTRITION,+B.H.+Rd,+near+DHANALAKSHMI+BANK,+Kottakkal,+Keralam+676503" target="_blank" rel="noopener">Kottakkal</a></li>
+          <li><a href="https://www.google.com/maps?q=FUELX+NUTRITION,+near+hdfc+bank,+Puthanathani,+Keralam+676551" target="_blank" rel="noopener">Puthanathani</a></li>
+          <li><a href="https://www.google.com/maps?q=FUELX+NUTRITION,+ROSE+LOUNGE+AUDITORIUM,+NEAR,+Malappuram,+Keralam+676504" target="_blank" rel="noopener">Malappuram</a></li>
+          <li><a href="https://www.google.com/maps?q=FUELX+NUTRITION,+CHERUR+ROAD,+Kazhukanchina,+Vengara,+Oorakam,+Keralam+676304" target="_blank" rel="noopener">Vengara</a></li>
+          <li><a href="https://www.google.com/maps?q=FUELX+NUTRITION,+near+ZUDIO,+Tirur,+Keralam+676105" target="_blank" rel="noopener">Tirur</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__title">Order</p>
+        <p class="footer__text">Message us on WhatsApp with your goal and we'll put together the right stack for you.</p>
+        <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="footer__more" data-wa>Order on WhatsApp <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="frame footer__bottom">
+      <p>© <span id="year"></span> Fuel X Pro Nutrition. All rights reserved.</p>
+      <p class="footer__note">Supplements are not a substitute for a balanced diet. Consult a professional if you have a medical condition.</p>
+    </div>
+    <div class="frame">
+      <p class="footer__mark" aria-hidden="true"><span>F</span><span>U</span><span>E</span><span>L</span><span class="footer__mark-gap"></span><span class="footer__mark-x">X</span></p>
+      <p class="footer__credits">
+        Photographs:
+        overhead lift by <a href="https://www.flickr.com/photos/64505665@N06/5892987840" target="_blank" rel="noopener">CrossFit Fever</a> (CC BY 2.0);
+        Eugen Sandow, about 1894, <a href="https://commons.wikimedia.org/wiki/File:Eugen_Sandow,_1867-1925_LCCN2002697564.jpg" target="_blank" rel="noopener">Library of Congress</a> (public domain);
+        gym photographs from rawpixel (CC0).
+      </p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/918921852071" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp" data-wa>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg>
+  </a>
+</body>
+</html>

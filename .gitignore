@@ -1,0 +1,9 @@
+# Working copies and previews, not part of the live site
+backup-*/
+examples/
+phone-preview.html
+fuelxpro-nutrition.html
+# In-store photos no longer used by the page (kept locally)
+assets/products/
+assets/hero-product.png
+.DS_Store
